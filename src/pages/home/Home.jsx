@@ -2,10 +2,10 @@ import { toast } from 'react-hot-toast';
 
 const foodAlert = () => {
   toast.custom(
-    <div className='alert alert-success max-w-xs w-[80%]'>
+    <div className='alert alert-success w-[80%] max-w-xs'>
       <svg
         xmlns='http://www.w3.org/2000/svg'
-        className='stroke-current shrink-0 h-6 w-6'
+        className='h-6 w-6 shrink-0 stroke-current'
         fill='none'
         viewBox='0 0 24 24'>
         <path
@@ -16,7 +16,7 @@ const foodAlert = () => {
         />
       </svg>
       <span>Sirviendo comida</span>
-    </div>
+    </div>,
   );
 };
 
@@ -31,7 +31,7 @@ const Home = () => {
           xmlns='http://www.w3.org/2000/svg'
           fill='none'
           viewBox='0 0 24 24'
-          className='stroke-info shrink-0 w-6 h-6'>
+          className='h-6 w-6 shrink-0 stroke-info'>
           <path
             strokeLinecap='round'
             strokeLinejoin='round'
