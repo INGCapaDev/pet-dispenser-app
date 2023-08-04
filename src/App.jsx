@@ -1,8 +1,8 @@
-import Footer from './components/Footer';
-import Header from './components/Header';
+import Footer from './components/Footer.jsx';
+import Header from './components/Header.jsx';
 
 import { Toaster } from 'react-hot-toast';
-import Home from './pages/home/Home';
+import Home from './pages/home/Home.jsx';
 
 const App = () => {
   return (

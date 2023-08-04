@@ -16,7 +16,7 @@ const foodAlert = () => {
         />
       </svg>
       <span>Sirviendo comida</span>
-    </div>
+    </div>,
   );
 };
 
