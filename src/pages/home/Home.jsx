@@ -1,4 +1,5 @@
 import { toast } from 'react-hot-toast';
+import { sendWebSocketMessage } from '../../utils/webSocketConnection';
 
 const foodAlert = () => {
   toast.custom(
@@ -18,6 +19,7 @@ const foodAlert = () => {
       <span>Sirviendo comida</span>
     </div>,
   );
+  sendWebSocketMessage('dispensar');
 };
 
 const Home = () => {
