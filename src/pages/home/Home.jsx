@@ -1,5 +1,7 @@
 import { toast } from 'react-hot-toast';
 import { sendWebSocketMessage } from '../../utils/webSocketConnection';
+import { CountdownContext } from '../../context/CountdownContext.jsx';
+import { useContext } from 'react';
 
 const foodAlert = () => {
   toast.custom(
@@ -23,25 +25,31 @@ const foodAlert = () => {
 };
 
 const Home = () => {
+  const { hours, minutes, seconds } = useContext(CountdownContext);
   return (
     <>
       <button className='btn btn-circle h-40 w-40' onClick={foodAlert}>
         <img src='./img/pet-bowl.png' alt='' className='h-2/4' />
       </button>
-      <div className='alert max-w-[80%]'>
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          fill='none'
-          viewBox='0 0 24 24'
-          className='h-6 w-6 shrink-0 stroke-info'>
-          <path
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth='2'
-            d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'></path>
-        </svg>
-        <span>Hora de comer: </span>
-        <span>10:00am</span>
+      <div className='grid auto-cols-max grid-flow-col gap-5 text-center'>
+        <div className='rounded-box flex flex-col bg-neutral p-2 text-neutral-content'>
+          <span className='countdown font-mono text-5xl'>
+            <span style={{ '--value': hours }}></span>
+          </span>
+          horas
+        </div>
+        <div className='rounded-box flex flex-col bg-neutral p-2 text-neutral-content'>
+          <span className='countdown font-mono text-5xl'>
+            <span style={{ '--value': minutes }}></span>
+          </span>
+          min
+        </div>
+        <div className='rounded-box flex flex-col bg-neutral p-2 text-neutral-content'>
+          <span className='countdown font-mono text-5xl'>
+            <span style={{ '--value': seconds }}></span>
+          </span>
+          sec
+        </div>
       </div>
     </>
   );
