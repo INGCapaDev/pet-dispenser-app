@@ -1,6 +1,7 @@
+import { useContext } from 'react';
 import { createContext, useState, useEffect } from 'react';
 
-export const CountdownContext = createContext(null);
+const CountdownContext = createContext(null);
 
 export const CountdownProvider = ({ children }) => {
   const [seconds, setSeconds] = useState(0);
@@ -72,3 +73,14 @@ export const CountdownProvider = ({ children }) => {
   );
 };
 export default CountdownProvider;
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const useCountdownContext = () => {
+  const context = useContext(CountdownContext);
+  if (!context) {
+    throw new Error(
+      'useCountdownContext must be used within a CountdownProvider',
+    );
+  }
+  return context;
+};

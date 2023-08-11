@@ -1,7 +1,6 @@
 import { toast } from 'react-hot-toast';
 import { sendWebSocketMessage } from '../../utils/webSocketConnection';
-import { CountdownContext } from '../../context/CountdownContext.jsx';
-import { useContext } from 'react';
+import { useCountdownContext } from '../../context/CountdownContext.jsx';
 
 const foodAlert = () => {
   toast.custom(
@@ -25,7 +24,7 @@ const foodAlert = () => {
 };
 
 const Home = () => {
-  const { hours, minutes, seconds } = useContext(CountdownContext);
+  const { hours, minutes, seconds } = useCountdownContext();
   return (
     <>
       <button className='btn btn-circle h-40 w-40' onClick={foodAlert}>
