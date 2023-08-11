@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useCountdownContext } from '../../context/CountdownContext.jsx';
 import { TimePicker } from 'react-ios-time-picker';
 import { sendWebSocketMessage } from '../../utils/webSocketConnection.js';
+import { toast } from 'react-hot-toast';
+import Toast from '../../components/Toast.jsx';
 
 const ONE_HOUR_IN_SECONDS = 3600;
 const ONE_MINUTE_IN_SECONDS = 60;
@@ -28,6 +30,7 @@ const Config = () => {
   const onUpdateTime = () => {
     updateValues(hours, minutes, 0);
     sendWebSocketMessage(convertToSeconds(hours, minutes));
+    toast.custom(<Toast text='Actualizado exitosamente' />);
     setIsDisabled(true);
   };
 

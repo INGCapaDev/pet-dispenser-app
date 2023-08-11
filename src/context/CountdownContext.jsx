@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 import { createContext, useState, useEffect } from 'react';
+import { toast } from 'react-hot-toast';
+import Toast from '../components/Toast.jsx';
 
 const CountdownContext = createContext(null);
 
@@ -12,6 +14,8 @@ export const CountdownProvider = ({ children }) => {
   const [countdownMinutes, setCountdownMinutes] = useState(minutes);
   const [countdownHours, setCountdownHours] = useState(hours);
 
+  const [isConfigured, setIsConfigured] = useState(false);
+
   const updateValues = (hours, minutes, seconds) => {
     setSeconds(seconds);
     setMinutes(minutes);
@@ -19,6 +23,7 @@ export const CountdownProvider = ({ children }) => {
     setCountdownSeconds(seconds);
     setCountdownMinutes(minutes);
     setCountdownHours(hours);
+    setIsConfigured(true);
   };
 
   const updateCountdown = () => {
@@ -48,16 +53,19 @@ export const CountdownProvider = ({ children }) => {
       setCountdownSeconds(seconds);
       setCountdownMinutes(minutes);
       setCountdownHours(hours);
+      toast.custom(<Toast text='Alimentando a tu mascota' />);
     }
   };
 
   useEffect(() => {
-    const countdownInterval = setInterval(updateCountdown, 1000);
+    if (isConfigured) {
+      const countdownInterval = setInterval(updateCountdown, 1000);
 
-    return () => {
-      clearInterval(countdownInterval);
-    };
-  }, [countdownHours, countdownMinutes, countdownSeconds]);
+      return () => {
+        clearInterval(countdownInterval);
+      };
+    }
+  }, [countdownHours, countdownMinutes, countdownSeconds, isConfigured]);
 
   const contextValue = {
     seconds: countdownSeconds,
