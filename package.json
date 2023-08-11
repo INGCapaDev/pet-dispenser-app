@@ -37,5 +37,9 @@
     "prettier": "^3.0.1",
     "prettier-plugin-tailwindcss": "^0.4.1",
     "vite": "^4.4.5"
-  }
+  },
+  "description": "Automatic Pet Feeder App",
+  "main": "postcss.config.js",
+  "author": "",
+  "license": "ISC"
 }
