@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useCountdownContext } from '../../context/CountdownContext.jsx';
-import { TimePicker } from 'react-ios-time-picker';
 import { sendWebSocketMessage } from '../../utils/webSocketConnection.js';
 import { toast } from 'react-hot-toast';
+
 import Toast from '../../components/Toast.jsx';
+import TimePicker from './components/TimePicker.jsx';
 
 const ONE_HOUR_IN_SECONDS = 3600;
 const ONE_MINUTE_IN_SECONDS = 60;
@@ -14,17 +15,18 @@ const convertToSeconds = (hours, minutes) => {
 
 const Config = () => {
   const { updateValues } = useCountdownContext();
-  const [time, setTime] = useState();
-  const [minutes, setMinutes] = useState();
-  const [hours, setHours] = useState();
-  const [isDisabled, setIsDisabled] = useState(true);
+  const [minutes, setMinutes] = useState(1);
+  const [hours, setHours] = useState(0);
+  const [isDisabled, setIsDisabled] = useState(false);
 
-  const onChange = (timeValue) => {
-    setTime(timeValue);
-    setIsDisabled(false);
-    const [hoursValue, minutesValue] = timeValue.split(':');
+  const onChangeMinutes = (minutesValue) => {
     setMinutes(parseInt(minutesValue));
+    setIsDisabled(false);
+  };
+
+  const onChangeHours = (hoursValue) => {
     setHours(parseInt(hoursValue));
+    setIsDisabled(false);
   };
 
   const onUpdateTime = () => {
@@ -38,16 +40,12 @@ const Config = () => {
     <>
       <h2 className='text-center text-2xl font-bold'>Configuración</h2>
       <p className='text-center text-lg'>
-        ¿Con qué frecuencia come tu mascota?
+        ¿Con qué frecuencia <br className='sm:hidden' /> come tu mascota?
       </p>
 
       <TimePicker
-        onChange={onChange}
-        value={time}
-        cellHeight={40}
-        cancelButtonText='Cancelar'
-        saveButtonText='Guardar'
-        placeHolder='Tiempo'
+        onChangeHours={onChangeHours}
+        onChangeMinutes={onChangeMinutes}
       />
 
       <button
